@@ -1,0 +1,50 @@
+---
+title: "Untitled"
+author: "Pascal Lee Slew"
+date: '2022-02-21'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup, message=FALSE, warning=FALSE}
+### Workspace setup
+# load the required libraries
+library(tidyverse)
+
+```
+
+
+
+```{r}
+# read in the text of dracula and remove the front matter and end matter
+text <- readLines("https://www.gutenberg.org/files/345/345-0.txt")[108:15426]
+```
+
+```{r}
+# convert text to tibble format
+data <- tibble(text)
+glimpse(data)
+
+# remove any empty rows
+n <- nrow(data)
+count = 0
+for (i in 1:n){
+  if (data$text[i] == ""){
+    count = count + 1
+  }
+}
+
+# removing empty line spaces 
+full <- tibble()
+for (i in 1:n){
+  if (data$text[i] != ""){
+    full <- c(full, data$text[i])
+  }
+}
+
+
+```
+
